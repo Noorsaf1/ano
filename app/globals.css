@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-primary text-text font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-wider;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply px-6 py-2 border border-text transition-all duration-400 text-sm font-medium;
+  }
+  
+  .btn:hover {
+    @apply bg-text text-primary;
+  }
+  
+  .nav-link {
+    @apply relative inline-block font-sans tracking-wider text-sm uppercase px-1 py-2 transition-all duration-400;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute w-0 h-px bg-text left-0 -bottom-1 transition-all duration-400;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
+
+.masonry-grid {
+  display: flex;
+  width: 100%;
+  margin-left: -16px;
+}
+
+.masonry-column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+.image-container {
+  @apply relative overflow-hidden mb-4;
+}
+
+.image-container img {
+  @apply transition-all duration-500;
+}
+
+.image-container:hover img {
+  @apply scale-105;
+}
+
+.image-overlay {
+  @apply absolute inset-0 bg-text/20 opacity-0 transition-all duration-400 flex items-center justify-center;
+}
+
+.image-container:hover .image-overlay {
+  @apply opacity-100;
+}
+
+.testimonial-card {
+  @apply bg-secondary p-8 rounded-none border-l-2 border-accent;
+}
+
+.scroll-indicator {
+  @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center;
+}
+
+.scroll-indicator .mouse {
+  @apply w-6 h-10 border-2 border-text rounded-full flex justify-center;
+}
+
+.scroll-indicator .wheel {
+  @apply w-1 h-2 bg-text rounded-full mt-2 animate-bounce;
+} 
