@@ -1,13 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { RiMailLine, RiPhoneLine, RiMapPinLine, RiInstagramLine, RiFacebookLine, RiTwitterLine } from 'react-icons/ri'
 import { useSiteContext } from '../context/SiteContext'
+import emailjs from '@emailjs/browser'
+
+// EmailJS-konfiguration - ersätt med dina egna nycklar
+const EMAILJS_SERVICE_ID = 'service_hz33hxa'  // Ändra till din service-ID
+const EMAILJS_TEMPLATE_ID = 'template_m3d6538' // Ändra till din mall-ID
+const EMAILJS_PUBLIC_KEY = '943t-FZzYhbQZ2lCF' // Ändra till din public key
 
 export default function Contact() {
   const { siteData } = useSiteContext()
   const { email, phone, address, hours } = siteData.contact
+  const formRef = useRef<HTMLFormElement>(null)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +22,11 @@ export default function Contact() {
     subject: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean;
+    message?: string;
+  }>({})
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -23,14 +35,48 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, you would handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Tack för ditt meddelande! Jag återkommer till dig så snart som möjligt.')
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
+    setIsSubmitting(true)
+    setSubmitStatus({})
+    
+    // Använd EmailJS för att skicka formuläret med kunden som avsändare
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      reply_to: formData.email, // Viktigt: Detta gör att du kan svara direkt till kunden
+      from_name: formData.name  // Sätt kundens namn som avsändare
+    }
+    
+    emailjs.send(
+      EMAILJS_SERVICE_ID, 
+      EMAILJS_TEMPLATE_ID, 
+      templateParams, 
+      EMAILJS_PUBLIC_KEY
+    )
+    .then((result) => {
+      console.log('E-post skickad!', result.text)
+      setSubmitStatus({
+        success: true,
+        message: 'Tack för ditt meddelande! Jag återkommer till dig så snart som möjligt.'
+      })
+      // Rensa formuläret efter lyckad sändning
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+    })
+    .catch((error) => {
+      console.error('E-postfel:', error)
+      setSubmitStatus({
+        success: false,
+        message: 'Ett fel uppstod när meddelandet skulle skickas. Försök igen eller kontakta mig direkt via e-post.'
+      })
+    })
+    .finally(() => {
+      setIsSubmitting(false)
     })
   }
 
@@ -59,7 +105,13 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {submitStatus.message && (
+              <div className={`mb-6 p-4 ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                {submitStatus.message}
+              </div>
+            )}
+            
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block mb-2 text-sm font-medium">
                   Ditt namn
@@ -121,8 +173,20 @@ export default function Contact() {
                   className="w-full p-3 bg-primary border border-subtle focus:border-accent outline-none"
                 ></textarea>
               </div>
-              <button type="submit" className="btn w-full">
-                Skicka meddelande
+              <button 
+                type="submit" 
+                className="btn w-full relative" 
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Skickar...' : 'Skicka meddelande'}
+                {isSubmitting && (
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <svg className="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </span>
+                )}
               </button>
             </form>
           </motion.div>

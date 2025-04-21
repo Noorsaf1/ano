@@ -35,9 +35,6 @@ export default function About() {
             <p className="text-lg leading-relaxed">
               {bio}
             </p>
-            <div>
-              <button className="btn mt-4">Min metod</button>
-            </div>
           </div>
         </motion.div>
       </div>

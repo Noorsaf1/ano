@@ -43,6 +43,35 @@
   .nav-link:hover::after {
     @apply w-full;
   }
+  
+  /* Hamburger menu specific styles */
+  .mobile-nav-link {
+    @apply block w-full text-center py-3 px-4 transition-all duration-300 relative;
+  }
+  
+  .mobile-nav-link:active {
+    @apply bg-accent/20;
+  }
+  
+  .mobile-nav-link.active {
+    @apply font-medium;
+  }
+  
+  /* Menu animation */
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .menu-item-animation {
+    animation: fadeDown 0.3s ease-out forwards;
+  }
 }
 
 .masonry-grid {
@@ -81,13 +110,64 @@
 }
 
 .scroll-indicator {
-  @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
-.scroll-indicator .mouse {
-  @apply w-6 h-10 border-2 border-text rounded-full flex justify-center;
+.mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid #fff;
+  border-radius: 13px;
+  position: relative;
+  margin: 0 auto;
 }
 
-.scroll-indicator .wheel {
-  @apply w-1 h-2 bg-text rounded-full mt-2 animate-bounce;
+.wheel {
+  width: 4px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: wheelScroll 1.5s ease-in-out infinite;
+}
+
+@keyframes wheelScroll {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(12px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(18px);
+  }
+}
+
+@keyframes pulseDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 0.5;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.animate-pulse-down {
+  animation: pulseDown 1.5s ease-in-out infinite;
 } 

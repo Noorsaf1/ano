@@ -86,3 +86,41 @@ npm run start
 ## Licens
 
 MIT 
+
+## Konfigurera EmailJS för kontaktformulär
+
+För att kontaktformuläret ska fungera behöver du konfigurera EmailJS:
+
+1. Skapa ett konto på [EmailJS](https://www.emailjs.com/)
+2. Skapa en ny Email Service (Gmail, Outlook etc.)
+3. Skapa en Email Template med följande parametrar:
+   - `name`: Avsändarens namn
+   - `email`: Avsändarens e-post
+   - `subject`: Ämnesrad
+   - `message`: Meddelandeinnehåll
+
+4. Uppdatera konstanter i `app/sections/Contact.tsx`:
+
+```jsx
+const EMAILJS_SERVICE_ID = 'ditt_service_id'
+const EMAILJS_TEMPLATE_ID = 'din_template_id'
+const EMAILJS_PUBLIC_KEY = 'din_public_key'
+```
+
+## Supabase-konfiguration
+
+1. Skapa ett Supabase-konto och projekt
+2. Konfigurera Storage Buckets enligt anvisningar i `SUPABASE_SETUP.md`
+3. Uppdatera Supabase-konfigurationen i `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=din_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=din_supabase_anon_key
+```
+
+## Admin-åtkomst
+
+Admin-sidan är skyddad med lösenord:
+
+1. Gå till `/admin`
+2. Använd lösenordet: `ano123` (Du kan ändra detta i app/admin/page.tsx) 

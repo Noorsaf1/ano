@@ -7,6 +7,7 @@ export type HeroData = {
   heading: string
   tagline: string
   image: string
+  images?: string[] // Array med bilder för slider
 }
 
 export type AboutData = {
@@ -27,6 +28,7 @@ export type ServiceItem = {
   title: string
   description: string
   icon: string
+  price?: string
 }
 
 export type TestimonialItem = {
@@ -104,19 +106,22 @@ const defaultSiteData: SiteData = {
       id: 1,
       title: 'Bröllop',
       description: 'Fånga de magiska ögonblicken på er stora dag.',
-      icon: 'wedding'
+      icon: 'wedding',
+      price: 'Från 12000 kr'
     },
     {
       id: 2,
       title: 'Porträtt',
       description: 'Professionella porträtt för privatpersoner och företag.',
-      icon: 'portrait'
+      icon: 'portrait',
+      price: '1500 kr/timme'
     },
     {
       id: 3,
       title: 'Event',
       description: 'Dokumentation av event, konserter och tillställningar.',
-      icon: 'event'
+      icon: 'event',
+      price: 'Offert efter behov'
     }
   ],
   testimonials: [

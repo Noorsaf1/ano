@@ -3,9 +3,17 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useSiteContext } from '../context/SiteContext'
+import ServiceIcon from '../components/ServiceIcon'
 
 export default function Services() {
   const { siteData } = useSiteContext()
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <section id="services" className="py-24 bg-subtle">
@@ -29,30 +37,41 @@ export default function Services() {
           {siteData.services.map((service, index) => (
             <motion.div
               key={service.id}
-              className="bg-primary shadow-sm hover:shadow-md transition-all duration-400"
+              className="bg-primary shadow-sm hover:shadow-md transition-all duration-400 flex flex-col"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="relative h-64">
+              <div className="p-10 flex items-center justify-center bg-subtle">
                 {service.icon.startsWith('http') || service.icon.startsWith('blob:') ? (
                   <Image
                     src={service.icon}
                     alt={service.title}
-                    fill
-                    className="object-cover"
+                    width={80}
+                    height={80}
+                    className="object-contain"
                   />
                 ) : (
-                  <div className="w-full h-full bg-subtle flex items-center justify-center">
-                    <span className="text-4xl">{service.icon}</span>
+                  <div className="text-accent">
+                    <ServiceIcon type={service.icon} className="w-20 h-20" />
                   </div>
                 )}
               </div>
-              <div className="p-6">
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-serif mb-2">{service.title}</h3>
-                <p className="mb-4">{service.description}</p>
-                <button className="btn w-full">Kontakta mig</button>
+                <p className="mb-4 flex-grow">{service.description}</p>
+                {service.price && (
+                  <div className="mb-4 py-2 px-4 bg-text text-primary font-medium rounded-sm text-center">
+                    {service.price}
+                  </div>
+                )}
+                <button 
+                  className="btn w-full mt-auto"
+                  onClick={scrollToContact}
+                >
+                  Kontakta mig
+                </button>
               </div>
             </motion.div>
           ))}
