@@ -118,9 +118,5 @@ NEXT_PUBLIC_SUPABASE_URL=din_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=din_supabase_anon_key
 ```
 
-## Admin-åtkomst
 
-Admin-sidan är skyddad med lösenord:
 
-1. Gå till `/admin`
-2. Använd lösenordet: `ano123` (Du kan ändra detta i app/admin/page.tsx) 
