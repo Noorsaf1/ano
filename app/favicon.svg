@@ -1,0 +1,87 @@
+<svg 
+  width="48" 
+  height="68" 
+  viewBox="0 0 48 68" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Small Flowers -->
+  <!-- Flower 1 -->
+  <g transform="translate(10, 8)">
+    <circle cx="0" cy="-2.1" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="2.1" cy="0" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="2.1" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="-2.1" cy="0" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="0" r="1.4" fill="#FFEF96" stroke="#333333" strokeWidth="0.3" />
+  </g>
+  
+  <!-- Flower 2 -->
+  <g transform="translate(24, 5)">
+    <circle cx="0" cy="-2.4" r="2.4" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="2.4" cy="0" r="2.4" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="2.4" r="2.4" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="-2.4" cy="0" r="2.4" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="0" r="1.6" fill="#FFEF96" stroke="#333333" strokeWidth="0.3" />
+  </g>
+  
+  <!-- Flower 3 -->
+  <g transform="translate(38, 8)">
+    <circle cx="0" cy="-2.1" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="2.1" cy="0" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="2.1" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="-2.1" cy="0" r="2.1" fill="#FFC0CB" opacity="0.75" />
+    <circle cx="0" cy="0" r="1.4" fill="#FFEF96" stroke="#333333" strokeWidth="0.3" />
+  </g>
+  
+  <!-- Camera Body -->
+  <rect 
+    x="11" 
+    y="17" 
+    width="26" 
+    height="16" 
+    rx="3" 
+    fill="#FADADD" 
+    stroke="#333333"
+    strokeWidth="1"
+  />
+  
+  <!-- Camera Lens -->
+  <circle 
+    cx="24" 
+    cy="25" 
+    r="5" 
+    fill="#E8E0D0" 
+    stroke="#333333" 
+    strokeWidth="1" 
+  />
+  
+  <!-- Camera Center -->
+  <circle 
+    cx="24" 
+    cy="25" 
+    r="2.5" 
+    fill="#333333" 
+  />
+  
+  <!-- Camera Flash -->
+  <rect 
+    x="28" 
+    y="13" 
+    width="7" 
+    height="3.5" 
+    rx="1.5" 
+    fill="#FADADD"
+    stroke="#333333"
+    strokeWidth="0.8" 
+  />
+  
+  <!-- Camera Viewfinder -->
+  <rect 
+    x="13" 
+    y="19.5" 
+    width="3.5" 
+    height="2" 
+    rx="1" 
+    fill="#E8E0D0" 
+  />
+</svg> 
